@@ -38,10 +38,9 @@ public class ImplementacionLibroDao implements LibroDao{
 
     @Override
     public boolean updateLibro(int codigo, Libro libros) {
-        String genero ="";
-        String titulo = "";
-        String autor = "";
-       
+        if (LibroMap.containsKey(libros.getCodigo())) {
+            LibroMap.put(libros.getCodigo(), libros);
+        }
         return true;
     }
 
