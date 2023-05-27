@@ -46,14 +46,17 @@ public class ImplementacionUsuarioMapDao implements UsuarioDao {
 
     @Override
     public boolean updateUsiario(int codigo, Usuario usuario) {
-        String ocupacion="";
-        boolean PrestamoActivo=true;
-        boolean parcilmenteActivo=true;
-        usuario.setOcupacion(ocupacion);
-        usuario.setPrestamoaActivo(PrestamoActivo);
-        usuario.setParcialmenteActivo(parcilmenteActivo);
+    if (UsuarioMap.containsKey(codigo)) {
+        Usuario usuarioExistente = UsuarioMap.get(codigo);
+        usuarioExistente.setName(usuario.getName());
+        usuarioExistente.setOcupacion(usuario.getOcupacion());
+        usuarioExistente.setPrestamoaActivo(usuario.isPrestamoaActivo());
+        usuarioExistente.setParcialmenteActivo(usuario.isParcialmenteActivo());
         return true;
     }
+    return false;
+}
+
 
     @Override
     public boolean deleteUsuario(int codigo, Usuario usuario) {
