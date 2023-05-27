@@ -1,13 +1,14 @@
 package DAO;
 
-import java.util.List;
-import model.Libro;
 
+import model.Libro;
+import java.util.List;
 
 public interface LibroDao {
-    public List<Libro> getLibros();
-    public Libro getLibro(int codigo, String autor);
-    public boolean addLibro(Libro libros);
-    public boolean updateLibro(int codigo, Libro libros);
-    public boolean deleteLibro(int codigo, Libro libros);
+    List<Libro> listarLibros();
+    Libro obtenerLibroPorCodigo(int codigo);
+    void agregarLibro(Libro libro);
+    void actualizarLibro(Libro libro);
+    void eliminarLibro(Libro libro);
 }
+

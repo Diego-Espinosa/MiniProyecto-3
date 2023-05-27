@@ -4,10 +4,7 @@
  */
 package model;
 
-/**
- *
- * @author diego
- */
+
 public class Libro {
 
     private static int sequence = 0;
