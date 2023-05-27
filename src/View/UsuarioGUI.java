@@ -182,6 +182,7 @@ public class UsuarioGUI extends JFrame {
         actualizarListaUsuarios();
     }
 
+
     public void actualizarListaUsuarios() {
         usuariosTextArea.setText("");
         List<Usuario> usuarios = usuarioController.getUsuarios();
