@@ -53,4 +53,15 @@ public class UsuarioController {
             usuarioDao.deleteUsuario(codigo, usuarioExistente);
         }
     }
+    
+    public Usuario buscarUsuarioPorNombre(String nombre) {
+    List<Usuario> usuarios = usuarioDao.getUsuarios();
+    for (Usuario usuario : usuarios) {
+        if (usuario.getName().equalsIgnoreCase(nombre)) {
+            return usuario;
+        }
+    }
+    return null; // Si no se encuentra el usuario
+    }
+
 }
