@@ -250,13 +250,26 @@ public class UsuarioVista extends javax.swing.JFrame {
             parcialmenteactivo.setSelected(false);
         }
     }//GEN-LAST:event_eliminarActionPerformed
+    private void limpiarCampos() {
+        nombres.setText("");
+        ocupaciones.setText("");
+        prestamoactivo.setSelected(false);
+        parcialmenteactivo.setSelected(false);
+    }
 
+    private void actualizarUsuarios() {
+        List<Usuario> usuarios = usuarioController.getUsuarios();
+        usuariosTextArea.setText("");
+        for (Usuario usuario : usuarios) {
+            usuariosTextArea.append(usuario.toString() + "\n");
+        }
+    }
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
-         UsuarioDao usuarioDao = new ImplementacionUsuarioMapDao();
+        UsuarioDao usuarioDao = new ImplementacionUsuarioMapDao();
         UsuarioController usuarioController = new UsuarioController(usuarioDao);
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.

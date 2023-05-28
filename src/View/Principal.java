@@ -4,7 +4,9 @@
  * and open the template in the editor.
  */
 package View;
-import View.UsuarioGUI;
+import View.UsuarioVista;
+import Controller.UsuarioController;
+
 /**
  *
  * @author ASUS
@@ -137,9 +139,9 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_generoActionPerformed
 
     private void usuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usuarioActionPerformed
-        UsuarioVista newframe = new UsuarioVista();
-        newframe.setVisible(true);
-        this.dispose();//para que no se acumulen las ventanas
+        UsuarioVista usuarioVista = new UsuarioVista(UsuarioVista);
+        UsuarioVista(usuarioController).setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_usuarioActionPerformed
 
     private void libroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_libroActionPerformed
