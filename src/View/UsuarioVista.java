@@ -5,16 +5,24 @@
  */
 package View;
 
+import Controller.UsuarioController;
+import DAO.ImplementacionUsuarioMapDao;
+import DAO.UsuarioDao;
+import java.util.List;
+import javax.swing.JOptionPane;
+import model.Usuario;
+
 /**
  *
  * @author ASUS
  */
 public class UsuarioVista extends javax.swing.JFrame {
-
+    private UsuarioController usuarioController;
     /**
      * Creates new form UsuarioVista
      */
-    public UsuarioVista() {
+    public UsuarioVista(UsuarioController usuarioController) {
+        this.usuarioController = usuarioController;
         initComponents();
     }
 
@@ -31,15 +39,16 @@ public class UsuarioVista extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        nombre = new javax.swing.JTextField();
-        ocupacion = new javax.swing.JTextField();
+        nombres = new javax.swing.JTextField();
+        ocupaciones = new javax.swing.JTextField();
         prestamoactivo = new javax.swing.JCheckBox();
         parcialmenteactivo = new javax.swing.JCheckBox();
-        generadordetexto = new javax.swing.JTextField();
         agregar = new javax.swing.JButton();
         actualizar = new javax.swing.JButton();
         eliminar = new javax.swing.JButton();
         regresar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        usuariosTextArea = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -58,8 +67,6 @@ public class UsuarioVista extends javax.swing.JFrame {
             }
         });
 
-        generadordetexto.setEditable(false);
-
         agregar.setText("Agregar");
         agregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -68,8 +75,18 @@ public class UsuarioVista extends javax.swing.JFrame {
         });
 
         actualizar.setText("Actualizar");
+        actualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                actualizarActionPerformed(evt);
+            }
+        });
 
         eliminar.setText("Eliminar");
+        eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eliminarActionPerformed(evt);
+            }
+        });
 
         regresar.setText("Regresar");
         regresar.addActionListener(new java.awt.event.ActionListener() {
@@ -78,6 +95,10 @@ public class UsuarioVista extends javax.swing.JFrame {
             }
         });
 
+        usuariosTextArea.setColumns(20);
+        usuariosTextArea.setRows(5);
+        jScrollPane1.setViewportView(usuariosTextArea);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -85,32 +106,32 @@ public class UsuarioVista extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addComponent(agregar)
-                        .addGap(29, 29, 29)
-                        .addComponent(actualizar)
-                        .addGap(31, 31, 31)
-                        .addComponent(eliminar))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(33, 33, 33)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(generadordetexto, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING))
-                                .addGap(29, 29, 29)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(prestamoactivo)
-                                    .addComponent(parcialmenteactivo)
-                                    .addComponent(nombre, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
-                                    .addComponent(ocupacion)))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addGap(29, 29, 29)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(prestamoactivo)
+                            .addComponent(parcialmenteactivo)
+                            .addComponent(nombres, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
+                            .addComponent(ocupaciones)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(138, 138, 138)
-                        .addComponent(regresar)))
-                .addContainerGap(43, Short.MAX_VALUE))
+                        .addComponent(regresar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(agregar)
+                                .addGap(29, 29, 29)
+                                .addComponent(actualizar)
+                                .addGap(31, 31, 31)
+                                .addComponent(eliminar)))))
+                .addContainerGap(51, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -120,10 +141,10 @@ public class UsuarioVista extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
-                            .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(nombres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(jLabel2))
-                    .addComponent(ocupacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ocupaciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
@@ -137,9 +158,9 @@ public class UsuarioVista extends javax.swing.JFrame {
                     .addComponent(agregar)
                     .addComponent(actualizar)
                     .addComponent(eliminar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(generadordetexto, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(regresar)
                 .addContainerGap(17, Short.MAX_VALUE))
         );
@@ -150,22 +171,93 @@ public class UsuarioVista extends javax.swing.JFrame {
     private void prestamoactivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prestamoactivoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_prestamoactivoActionPerformed
-
+    private void actualizarUsuario() {
+        usuariosTextArea.setText("");
+        List<Usuario> usuarios = usuarioController.getUsuarios();
+        for (Usuario usuario : usuarios) {
+            usuariosTextArea.append("Código: " + usuario.getCodigo() + "\n");
+            usuariosTextArea.append("Nombre: " + usuario.getName() + "\n");
+            usuariosTextArea.append("Ocupación: " + usuario.getOcupacion() + "\n");
+            usuariosTextArea.append("Préstamo Activo: " + usuario.isPrestamoaActivo() + "\n");
+            usuariosTextArea.append("Parcialmente Activo: " + usuario.isParcialmenteActivo() + "\n");
+            usuariosTextArea.append("\n");
+        }
+    }
     private void agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_agregarActionPerformed
 
+        String nombre = nombres.getText();
+        String ocupacion = ocupaciones.getText();
+        boolean prestamoActivo  = prestamoactivo.isSelected();
+        boolean parcialmenteActivo  = parcialmenteactivo.isSelected();
+
+        usuarioController.agregarUsuario(nombre, ocupacion, prestamoActivo, parcialmenteActivo);
+        actualizarUsuario();
+
+
+        // Limpiar los campos de texto y casillas de verificación
+        nombres.setText("");
+        ocupaciones.setText("");
+        prestamoactivo.setSelected(false);
+        parcialmenteactivo.setSelected(false);
+            
+    }//GEN-LAST:event_agregarActionPerformed
+    
     private void regresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regresarActionPerformed
         Principal frameAnterior = new Principal();
         frameAnterior.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_regresarActionPerformed
+    private int obtenerCodigoSeleccionado() {
+    String codigoString = JOptionPane.showInputDialog("Ingrese el código del usuario:");
+    int codigo = -1;
+    try {
+        codigo = Integer.parseInt(codigoString);
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Código inválido", "Error", JOptionPane.ERROR_MESSAGE);
+    }
+    return codigo;
+}
+
+    private void actualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actualizarActionPerformed
+        String nombre = nombres.getText();
+        String ocupacion = ocupaciones.getText();
+        boolean prestamoActivo = prestamoactivo.isSelected();
+        boolean parcialmenteActivo = parcialmenteactivo.isSelected();
+        
+        int codigo = obtenerCodigoSeleccionado();
+        if (codigo != -1) {
+            usuarioController.actualizarUsuario(codigo, nombre, ocupacion, prestamoActivo, parcialmenteActivo);
+            actualizarUsuario();
+
+            // Limpiar los campos de texto y casillas de verificación
+            nombres.setText("");
+            ocupaciones.setText("");
+            prestamoactivo.setSelected(false);
+            parcialmenteactivo.setSelected(false);
+        }
+    }//GEN-LAST:event_actualizarActionPerformed
+
+    private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
+        int codigo = obtenerCodigoSeleccionado();
+        if (codigo != -1) {
+            usuarioController.eliminarUsuario(codigo);
+            actualizarUsuario();
+
+            // Limpiar los campos de texto y casillas de verificación
+            nombres.setText("");
+            ocupaciones.setText("");
+            prestamoactivo.setSelected(false);
+            parcialmenteactivo.setSelected(false);
+        }
+    }//GEN-LAST:event_eliminarActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
+         UsuarioDao usuarioDao = new ImplementacionUsuarioMapDao();
+        UsuarioController usuarioController = new UsuarioController(usuarioDao);
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
@@ -191,7 +283,7 @@ public class UsuarioVista extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new UsuarioVista().setVisible(true);
+                new UsuarioVista(usuarioController).setVisible(true);
             }
         });
     }
@@ -200,15 +292,17 @@ public class UsuarioVista extends javax.swing.JFrame {
     private javax.swing.JButton actualizar;
     private javax.swing.JButton agregar;
     private javax.swing.JButton eliminar;
-    private javax.swing.JTextField generadordetexto;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JTextField nombre;
-    private javax.swing.JTextField ocupacion;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField nombres;
+    private javax.swing.JTextField ocupaciones;
     private javax.swing.JCheckBox parcialmenteactivo;
     private javax.swing.JCheckBox prestamoactivo;
     private javax.swing.JButton regresar;
+    private javax.swing.JTextArea usuariosTextArea;
     // End of variables declaration//GEN-END:variables
 }
+
