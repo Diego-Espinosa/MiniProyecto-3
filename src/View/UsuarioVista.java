@@ -18,6 +18,7 @@ public class UsuarioVista extends javax.swing.JFrame {
         UsuarioDao usuarioDao = new ImplementacionUsuarioMapDao();
         usuarioController = new UsuarioController(usuarioDao);
         initComponents();
+        cargarUsuarios();
     }
 
     /**
@@ -196,6 +197,7 @@ public class UsuarioVista extends javax.swing.JFrame {
     private void prestamoactivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prestamoactivoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_prestamoactivoActionPerformed
+    /*
     private void actualizarUsuario() {
         usuariosTextArea.setText("");
         List<Usuario> usuarios = usuarioController.getUsuarios();
@@ -206,8 +208,24 @@ public class UsuarioVista extends javax.swing.JFrame {
             usuariosTextArea.append("Préstamo Activo: " + usuario.isPrestamoaActivo() + "\n");
             usuariosTextArea.append("Parcialmente Activo: " + usuario.isParcialmenteActivo() + "\n");
             usuariosTextArea.append("\n");
+            System.out.println(usuarios); //ELIMINAR
         }
-    }
+    */
+    void cargarUsuarios() {
+        usuariosTextArea.setText("");
+        List<Usuario> usuarios = usuarioController.getUsuarios();
+        for (Usuario usuario : usuarios) {
+            usuariosTextArea.append("Código: " + usuario.getCodigo() + "\n");
+            usuariosTextArea.append("Nombre: " + usuario.getName() + "\n");
+            usuariosTextArea.append("Ocupación: " + usuario.getOcupacion() + "\n");
+            usuariosTextArea.append("Préstamo Activo: " + usuario.isPrestamoaActivo() + "\n");
+            usuariosTextArea.append("Parcialmente Activo: " + usuario.isParcialmenteActivo() + "\n");
+            usuariosTextArea.append("\n");
+            System.out.println(usuarios); //ELIMINAR
+        }
+}
+
+    
     private void agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarActionPerformed
 
         String nombre = nombres.getText();
@@ -216,7 +234,9 @@ public class UsuarioVista extends javax.swing.JFrame {
         boolean parcialmenteActivo  = parcialmenteactivo.isSelected();
 
         usuarioController.agregarUsuario(nombre, ocupacion, prestamoActivo, parcialmenteActivo);
-        actualizarUsuario();
+        //actualizarUsuario();
+        cargarUsuarios();
+        
 
 
         // Limpiar los campos de texto y casillas de verificación
@@ -224,6 +244,7 @@ public class UsuarioVista extends javax.swing.JFrame {
         ocupaciones.setText("");
         prestamoactivo.setSelected(false);
         parcialmenteactivo.setSelected(false);
+        
             
     }//GEN-LAST:event_agregarActionPerformed
     
@@ -252,7 +273,8 @@ public class UsuarioVista extends javax.swing.JFrame {
         int codigo = obtenerCodigoSeleccionado();
         if (codigo != -1) {
             usuarioController.actualizarUsuario(codigo, nombre, ocupacion, prestamoActivo, parcialmenteActivo);
-            actualizarUsuario();
+            //actualizarUsuario();
+            cargarUsuarios();
 
             // Limpiar los campos de texto y casillas de verificación
             nombres.setText("");
@@ -266,7 +288,8 @@ public class UsuarioVista extends javax.swing.JFrame {
         int codigo = obtenerCodigoSeleccionado();
         if (codigo != -1) {
             usuarioController.eliminarUsuario(codigo);
-            actualizarUsuario();
+            //actualizarUsuario();
+            cargarUsuarios();
 
             // Limpiar los campos de texto y casillas de verificación
             nombres.setText("");
@@ -298,7 +321,7 @@ public class UsuarioVista extends javax.swing.JFrame {
         parcialmenteactivo.setSelected(false);
     }
 
-    private void actualizarUsuarios() {
+    void actualizarUsuarios() {
         List<Usuario> usuarios = usuarioController.getUsuarios();
         usuariosTextArea.setText("");
         for (Usuario usuario : usuarios) {
