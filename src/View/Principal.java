@@ -4,13 +4,13 @@
  * and open the template in the editor.
  */
 package View;
-import View.UsuarioVista;
 import Controller.UsuarioController;
 
 /**
  *
  * @author ASUS
  */
+
 public class Principal extends javax.swing.JFrame {
 
     /**
@@ -40,6 +40,7 @@ public class Principal extends javax.swing.JFrame {
         jButton4.setText("jButton4");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         usuario.setBackground(new java.awt.Color(204, 255, 255));
         usuario.setFont(new java.awt.Font("Dubai Medium", 1, 18)); // NOI18N
@@ -139,8 +140,10 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_generoActionPerformed
 
     private void usuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usuarioActionPerformed
-        UsuarioVista usuarioVista = new UsuarioVista(UsuarioVista);
-        UsuarioVista(usuarioController).setVisible(true);
+        //  Aqui tiene que llamarse a UsuarioVista
+        UsuarioController usuarioController = new UsuarioController(); // Crea una instancia de UsuarioController si es necesario
+        UsuarioVista usuarioVista = new UsuarioVista();
+        usuarioVista.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_usuarioActionPerformed
 
@@ -197,3 +200,4 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton usuario;
     // End of variables declaration//GEN-END:variables
 }
+

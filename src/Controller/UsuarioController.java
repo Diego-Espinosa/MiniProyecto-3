@@ -5,6 +5,7 @@
  */
 package Controller;
 
+import DAO.ImplementacionUsuarioMapDao;
 import DAO.UsuarioDao;
 import java.util.List;
 import model.Usuario;
@@ -13,11 +14,16 @@ import model.Usuario;
  *
  * @author ASUS
  */
+
 public class UsuarioController {
     private UsuarioDao usuarioDao;
 
     public UsuarioController(UsuarioDao usuarioDao) {
         this.usuarioDao = usuarioDao;
+    }
+
+    public UsuarioController() {
+        usuarioDao = new ImplementacionUsuarioMapDao();
     }
 
     public List<Usuario> getUsuarios() {
