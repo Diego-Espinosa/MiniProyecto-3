@@ -139,6 +139,9 @@ public class Principal extends javax.swing.JFrame {
 
     private void generoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generoActionPerformed
         // TODO add your handling code here:
+        GeneroVista genero = new GeneroVista();  // Asumiendo que tienes un método en UsuarioVista para actualizar los usuarios
+        genero.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_generoActionPerformed
 
     private void usuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usuarioActionPerformed
