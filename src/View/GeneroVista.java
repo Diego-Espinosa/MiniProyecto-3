@@ -5,16 +5,21 @@
  */
 package View;
 
+import Controller.GeneroLiterarioController;
+import DAO.GeneroLiterarioDAO;
+import DAO.ImplementacioGeneroLiterarioDao;
+
 /**
  *
  * @author ASUS
  */
 public class GeneroVista extends javax.swing.JFrame {
-
+    private GeneroLiterarioController generoController;
     /**
      * Creates new form GeneroVista
      */
-    public GeneroVista() {
+    public GeneroVista(GeneroLiterarioController generoController) {
+        this.generoController = generoController;
         initComponents();
     }
 
@@ -32,7 +37,7 @@ public class GeneroVista extends javax.swing.JFrame {
         actualizar = new javax.swing.JButton();
         eliminar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        generosTextArea = new javax.swing.JTextArea();
         regresar = new javax.swing.JButton();
         campogenero = new javax.swing.JTextField();
         buscar = new javax.swing.JButton();
@@ -63,9 +68,9 @@ public class GeneroVista extends javax.swing.JFrame {
             }
         });
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        generosTextArea.setColumns(20);
+        generosTextArea.setRows(5);
+        jScrollPane1.setViewportView(generosTextArea);
 
         regresar.setText("Regresar");
         regresar.addActionListener(new java.awt.event.ActionListener() {
@@ -191,7 +196,9 @@ public class GeneroVista extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GeneroVista().setVisible(true);
+                GeneroLiterarioDAO generoDao = new ImplementacioGeneroLiterarioDao();
+                GeneroLiterarioController generoController = new GeneroLiterarioController(generoDao);
+                new GeneroVista(generoController).setVisible(true);
             }
         });
     }
@@ -204,8 +211,8 @@ public class GeneroVista extends javax.swing.JFrame {
     private javax.swing.JTextField campogenero;
     private javax.swing.JButton eliminar;
     private javax.swing.JLabel genero;
+    private javax.swing.JTextArea generosTextArea;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JButton regresar;
     // End of variables declaration//GEN-END:variables
 }
