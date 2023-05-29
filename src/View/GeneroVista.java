@@ -8,6 +8,8 @@ package View;
 import Controller.GeneroLiterarioController;
 import DAO.GeneroLiterarioDAO;
 import DAO.ImplementacioGeneroLiterarioDao;
+import java.util.List;
+import model.GeneroLiterario;
 
 /**
  *
@@ -149,21 +151,65 @@ public class GeneroVista extends javax.swing.JFrame {
         frameAnterior.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_regresarActionPerformed
-
+    private void actualizarGenerosTextArea() {
+        List<GeneroLiterario> generos = generoController.listarGenerosLiterarios();
+        StringBuilder sb = new StringBuilder();
+        for (GeneroLiterario genero : generos) {
+            sb.append(genero.getId()).append(": ").append(genero.getNombre()).append("\n");
+        }
+        generosTextArea.setText(sb.toString());
+    }
     private void agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarActionPerformed
-        // TODO add your handling code here:
+        String nombre = campogenero.getText();
+        generoController.crearGeneroLiterario(nombre);
+        actualizarGenerosTextArea();
+        campogenero.setText("");
     }//GEN-LAST:event_agregarActionPerformed
-
+    private GeneroLiterario obtenerGeneroSeleccionado() {
+        String texto = generosTextArea.getSelectedText();
+        if (texto != null) {
+            int id = Integer.parseInt(texto.substring(0, texto.indexOf(':')));
+            return generoController.obtenerGeneroLiterario(id);
+        }
+        return null;
+    }
     private void actualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actualizarActionPerformed
-        // TODO add your handling code here:
+        String nombre = campogenero.getText();
+        GeneroLiterario genero = obtenerGeneroSeleccionado();
+        if (genero != null) {
+            generoController.actualizarGeneroLiterario(genero.getId(), nombre);
+            actualizarGenerosTextArea();
+        }
+        campogenero.setText("");
     }//GEN-LAST:event_actualizarActionPerformed
 
     private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
-        // TODO add your handling code here:
+        GeneroLiterario genero = obtenerGeneroSeleccionado();
+        if (genero != null) {
+            generoController.eliminarGeneroLiterario(genero.getId());
+            actualizarGenerosTextArea();
+        }
     }//GEN-LAST:event_eliminarActionPerformed
 
+    private GeneroLiterario buscarGeneroLiterarioPorNombre(String nombre) {
+        List<GeneroLiterario> generos = generoController.listarGenerosLiterarios();
+        for (GeneroLiterario genero : generos) {
+            if (genero.getNombre().equalsIgnoreCase(nombre)) {
+                return genero;
+            }
+        }
+        return null;
+    }   
+    
     private void buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarActionPerformed
-        // TODO add your handling code here:
+        String nombre = campobuscar.getText();
+        GeneroLiterario genero = generoController.buscarGeneroLiterarioPorNombre(nombre);
+        if (genero != null) {
+            generosTextArea.setText(genero.getId() + ": " + genero.getNombre());
+        } else {
+            generosTextArea.setText("No se encontró ningún género literario con ese nombre.");
+        }
+        campobuscar.setText("");
     }//GEN-LAST:event_buscarActionPerformed
 
     /**

@@ -26,6 +26,16 @@ public class GeneroLiterarioController {
         generoLiterarioDao.crearGeneroLiterario(generoLiterario);
     }
 
+    public GeneroLiterario buscarGeneroLiterarioPorNombre(String nombre) {
+        List<GeneroLiterario> generosLiterarios = generoLiterarioDao.listarGenerosLiterarios();
+        for (GeneroLiterario generoLiterario : generosLiterarios) {
+            if (generoLiterario.getNombre().equalsIgnoreCase(nombre)) {
+                return generoLiterario;
+            }
+        }
+        return null;
+    }
+    
     public GeneroLiterario obtenerGeneroLiterario(int id) {
         return generoLiterarioDao.obtenerGeneroLiterario(id);
     }

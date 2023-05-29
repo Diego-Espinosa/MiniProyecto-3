@@ -23,7 +23,10 @@ public class ImplementacioGeneroLiterarioDao implements GeneroLiterarioDAO {
         this.generosLiterarios = new HashMap<>();
         this.nextId = 1;
     }
-
+    
+    public GeneroLiterario buscarGeneroLiterarioPorId(int id) {
+        return generosLiterarios.get(id);
+    }
     @Override
     public void crearGeneroLiterario(GeneroLiterario generoLiterario) {
         generoLiterario.setId(nextId);
