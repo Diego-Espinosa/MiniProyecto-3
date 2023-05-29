@@ -20,6 +20,10 @@ public class LibroController {
         this.libroDao = libroDao;
     }
 
+    public LibroController() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
     public List<Libro> listarLibros() {
         return libroDao.listarLibros();
     }
@@ -28,12 +32,12 @@ public class LibroController {
         return libroDao.obtenerLibroPorCodigo(codigo);
     }
 
-    public void agregarLibro(String genero, String titulo, String autor, String ejemplares) {
+    public void agregarLibro(String genero, String titulo, String autor, int ejemplares) {
         Libro libro = new Libro(genero, 0, titulo, autor, ejemplares); // El código se asignará automáticamente
         libroDao.agregarLibro(libro);
     }
 
-    public void actualizarLibro(int codigo, String genero, String titulo, String autor, String ejemplares) {
+    public void actualizarLibro(int codigo, String genero, String titulo, String autor, int ejemplares) {
         Libro libroExistente = libroDao.obtenerLibroPorCodigo(codigo);
         if (libroExistente != null) {
             libroExistente.setGenero(genero);
