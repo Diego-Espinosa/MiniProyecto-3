@@ -5,6 +5,7 @@
  */
 package View;
 
+
 import Controller.LibroController;
 import DAO.ImplementacionLibroDao;
 import DAO.LibroDao;
@@ -50,6 +51,7 @@ public class GeneroVista extends javax.swing.JFrame {
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -385,7 +387,9 @@ if (!ejemplaresText.isEmpty()) {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GeneroVista().setVisible(true);
+                GeneroLiterarioDAO generoDao = new ImplementacioGeneroLiterarioDao();
+                GeneroLiterarioController generoController = new GeneroLiterarioController(generoDao);
+                new GeneroVista(generoController).setVisible(true);
             }
         });
     }
@@ -408,5 +412,6 @@ if (!ejemplaresText.isEmpty()) {
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField titulos;
+
     // End of variables declaration//GEN-END:variables
 }

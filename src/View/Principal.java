@@ -14,11 +14,13 @@ import Controller.LibroController;
  */
 
 public class Principal extends javax.swing.JFrame {
+    private UsuarioVista usuarioVista;
 
     /**
      * Creates new form Principal
      */
     public Principal() {
+        
         initComponents();
     }
 
@@ -139,13 +141,20 @@ public class Principal extends javax.swing.JFrame {
 
     private void generoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generoActionPerformed
 
-
     }//GEN-LAST:event_generoActionPerformed
 
     private void usuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usuarioActionPerformed
         //  Aqui tiene que llamarse a UsuarioVista
+        /*
         UsuarioController usuarioController = new UsuarioController(); // Crea una instancia de UsuarioController si es necesario
         UsuarioVista usuarioVista = new UsuarioVista();
+        usuarioVista.setVisible(true);
+        this.dispose();
+        */
+        if (usuarioVista == null) {
+        usuarioVista = new UsuarioVista();
+        }
+        usuarioVista.cargarUsuarios();  // Asumiendo que tienes un método en UsuarioVista para actualizar los usuarios
         usuarioVista.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_usuarioActionPerformed
