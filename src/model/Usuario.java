@@ -23,6 +23,7 @@ public class Usuario {
         this.ocupacion = ocupacion;
     }
 
+
     public int getCodigo() {
         return codigo;
     }
