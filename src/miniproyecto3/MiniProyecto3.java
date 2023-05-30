@@ -4,6 +4,9 @@
  */
 package miniproyecto3;
 
+import View.UsuarioVista;
+import model.Usuario;
+import Controller.UsuarioController;
 /**
  *
  * @author diego
@@ -14,7 +17,6 @@ public class MiniProyecto3 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
     }
     
 }
