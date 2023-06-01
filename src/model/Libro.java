@@ -12,9 +12,9 @@ public class Libro {
     private int codigo;
     private String titulo;
     private String autor;
-    private String ejemplares;
+    private int ejemplares;
 
-    public Libro(String genero, int codigo, String titulo, String autor, String ejemplares) {
+    public Libro(String genero, int codigo, String titulo, String autor, int ejemplares) {
         this.genero = genero;
         this.codigo = ++sequence;
         this.titulo = titulo;
@@ -54,11 +54,11 @@ public class Libro {
         this.autor = autor;
     }
 
-    public String getEjemplares() {
+    public int getEjemplares() {
         return ejemplares;
     }
 
-    public void setEjemplares(String ejemplares) {
+    public void setEjemplares(int ejemplares) {
         this.ejemplares = ejemplares;
     }
 }

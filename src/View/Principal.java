@@ -4,7 +4,9 @@
  * and open the template in the editor.
  */
 package View;
+
 import Controller.UsuarioController;
+import Controller.LibroController;
 
 /**
  *
@@ -138,8 +140,7 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void generoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generoActionPerformed
-        // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_generoActionPerformed
 
     private void usuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usuarioActionPerformed
@@ -159,8 +160,9 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_usuarioActionPerformed
 
     private void libroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_libroActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_libroActionPerformed
+        GeneroVista generoVista = new GeneroVista();
+        generoVista.setVisible(true);
+        this.dispose();    }//GEN-LAST:event_libroActionPerformed
 
     private void prestamoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prestamoActionPerformed
         // TODO add your handling code here:
@@ -211,4 +213,3 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton usuario;
     // End of variables declaration//GEN-END:variables
 }
-
